@@ -32,3 +32,5 @@ import NeuralNet as nn
 
 a = np.array([0.3, 2.9, 4.0])
 print(af.softmax_function(a))
+
+print("test")
