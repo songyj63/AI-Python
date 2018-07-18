@@ -2,7 +2,7 @@ import numpy as np
 import matplotlib.pylab as plt
 import Perceptron
 import Activation_Functions as af
-import NeuralNet as nn
+import NeuralNet_Simple_Example as nn
 
 
 # print(Perceptron.XOR(0,0))
