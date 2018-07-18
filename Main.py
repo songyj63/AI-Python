@@ -1,8 +1,4 @@
-import numpy as np
-import matplotlib.pylab as plt
-import Perceptron
-import Activation_Functions as af
-import NeuralNet_Simple_Example as nn
+import sys, os
 
 
 # print(Perceptron.XOR(0,0))
@@ -30,5 +26,19 @@ import NeuralNet_Simple_Example as nn
 # y = nn.forward(network, x)
 # print(y)
 
-a = np.array([0.3, 2.9, 4.0])
-print(af.softmax_function(a))
+# # softmax test
+# a = np.array([0.3, 2.9, 4.0])
+# print(af.softmax_function(a))
+
+# MNIST data load and draw
+sys.path.append(os.pardir)
+from dataset.mnist import load_mnist
+
+(x_train, t_train), (x_test, t_test) = load_mnist(flatten=True, normalize=False)
+
+print(x_train.shape)
+print(t_train.shape)
+print(x_test.shape)
+print(t_test.shape)
+
+from PIL import Image
