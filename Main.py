@@ -1,8 +1,12 @@
 import numpy as np
 import sys, os
+
+from Gradient_Simplenet import simpleNet
 from dataset.mnist import load_mnist
 from PIL import Image
 import NeuralNet_Mnist_Eaxmple as nme
+import matplotlib.pylab as plt
+import Gradient_Functions as fc
 
 
 # print(Perceptron.XOR(0,0))
@@ -70,17 +74,64 @@ import NeuralNet_Mnist_Eaxmple as nme
 #
 # print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
 
-# MNIST example, predict & accuracy using batch
-x, t = nme.get_data()
-network = nme.init_network()
+# # MNIST example, predict & accuracy using batch
+# x, t = nme.get_data()
+# network = nme.init_network()
+#
+# batch_size = 100
+# accuracy_cnt = 0
+#
+# for i in range(0, len(x), batch_size):
+#     x_batch = x[i:i+batch_size]
+#     y_batch = nme.predict(network, x_batch)
+#     p = np.argmax(y_batch, axis=1)
+#     accuracy_cnt += np.sum(p == t[i:i+batch_size])
+#
+# print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
 
-batch_size = 100
-accuracy_cnt = 0
+# # diff example 1
+# def function_1(x):
+#     return 0.01*x**2 + 0.1*x
+#
+#
+# x = np.arange(0.0, 20.0, 0.1)
+# y = function_1(x)
+# plt.xlabel("x")
+# plt.ylabel("f(x)")
+# plt.plot(x, y)
+# plt.show()
+#
+# print(fc.numerical_diff(function_1, 5))
+# print(fc.numerical_diff(function_1, 10))
 
-for i in range(0, len(x), batch_size):
-    x_batch = x[i:i+batch_size]
-    y_batch = nme.predict(network, x_batch)
-    p = np.argmax(y_batch, axis=1)
-    accuracy_cnt += np.sum(p == t[i:i+batch_size])
+# # diff example 2
+# def function_2(x):
+#     return x[0]**2 + x[1]**2
+#
+# print(fc.numerical_gradient(function_2, np.array([3.0, 4.0])))
+# print(fc.numerical_gradient(function_2, np.array([0.0, 2.0])))
+# print(fc.numerical_gradient(function_2, np.array([3.0, 0.0])))
 
-print("Accuracy:" + str(float(accuracy_cnt) / len(x)))
+# # diff example - find the minimum gradient
+# def function_2(x):
+#     return x[0]**2 + x[1]**2
+#
+#
+# init_x = np.array([-3.0, 4.0])
+# print(fc.gradient_descent(function_2, init_x=init_x, lr=0.1, step_num=100))
+
+# Gradient simple network example
+net = simpleNet()
+print(net.W)
+
+x = np.array([0.6, 0.9])
+p = net.predict(x)
+print(p)
+print(np.argmax(p))
+
+t = np.array([0, 0, 1]) # 임의 정답 레이블
+print(net.loss(x, t))
+
+f = lambda w: net.loss(x, t)
+dW = fc.numerical_gradient(f, net.W)
+print(dW)
