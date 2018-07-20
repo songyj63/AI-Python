@@ -1,6 +1,5 @@
 import numpy as np
 import sys, os
-
 from Gradient_Simplenet import simpleNet
 from dataset.mnist import load_mnist
 from PIL import Image
@@ -135,3 +134,4 @@ print(net.loss(x, t))
 f = lambda w: net.loss(x, t)
 dW = fc.numerical_gradient(f, net.W)
 print(dW)
+
